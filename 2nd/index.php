@@ -18,3 +18,22 @@ foreach ($data as $movement){
 }
 
 echo $horizontal * $depth;
+echo "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
+$depth = 0;
+$horizontal = 0;
+$aim = 0;
+foreach ($data as $movement){
+    $movement = trim($movement);
+    $parts = explode(' ', $movement);
+    $command = $parts[0];
+    $distance = (int)$parts[1];
+    if ($command == 'forward'){
+        $horizontal += $distance;
+        $depth += $distance * $aim;
+    } elseif ($command == 'down'){
+        $aim += $distance;
+    } elseif ($command == 'up'){
+        $aim -= $distance;
+    }
+}
+echo $horizontal * $depth;
