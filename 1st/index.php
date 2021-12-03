@@ -11,3 +11,11 @@ for ($i = 0; $i < count($data); $i++) {
     }
 }
 echo $count;
+echo "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
+$count = 0;
+for ($i = 1; $i < count($data) - 2; $i++) {
+    if ((intval($data[$i-1])+intval($data[$i])+intval($data[$i+1])) < (intval($data[$i])+intval($data[$i+1])+intval($data[$i+2]))) {
+        $count++;
+    }
+}
+echo $count;
