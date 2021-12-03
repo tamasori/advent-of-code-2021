@@ -25,3 +25,53 @@ foreach ($calculatePersistence as $key => $value) {
     }
 }
 echo bindec($epsylonBinary) * bindec($gammaBinary);
+echo "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
+$oxygenData = $co2Data = $data;
+$helper = 0;
+$helperArray = [];
+$counter = [
+    1 => 0,
+    0 => 0,
+];
+do{
+    foreach ($oxygenData as $oData){
+        $counter[trim($oData)[$helper]]++;
+    }
+    foreach ($oxygenData as $oData){
+        if($oData[$helper] == ($counter[0] > $counter[1] ? 0 : 1)){
+            $helperArray[] = $oData;
+        }
+    }
+    $oxygenData = $helperArray;
+    $helperArray = [];
+    $counter = [
+        1 => 0,
+        0 => 0,
+    ];
+    $helper++;
+} while(count($oxygenData) > 1);
+
+$helper = 0;
+$helperArray = [];
+$counter = [
+    1 => 0,
+    0 => 0,
+];
+do{
+    foreach ($co2Data as $oData){
+        $counter[trim($oData)[$helper]]++;
+    }
+    foreach ($co2Data as $oData){
+        if($oData[$helper] == ($counter[0] > $counter[1] ? 1 : 0)){
+            $helperArray[] = $oData;
+        }
+    }
+    $co2Data = $helperArray;
+    $helperArray = [];
+    $counter = [
+        1 => 0,
+        0 => 0,
+    ];
+    $helper++;
+} while(count($co2Data) > 1);
+echo bindec($oxygenData[0]) * bindec($co2Data[0]);
